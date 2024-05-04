@@ -60,7 +60,7 @@ cmake \
   -D CISM_COUPLED:BOOL=OFF \
 \
   -D CISM_TRILINOS_DIR="$CISM_TRILINOS_DIR" \
-  -D CISM_NETCDF_DIR="/usr" \
+  -D CISM_NETCDF_DIR="/usr/local/netcdf-parallel" \
   -D CISM_NETCDF_LIBS="netcdff" \
 \
   -D CMAKE_Fortran_FLAGS="-g -O2 -ffree-line-length-none -fPIC -fno-range-check" \
@@ -71,8 +71,8 @@ cmake \
 \
   -D CISM_EXTRA_LIBS:STRING="-lblas" \
 \
-  -D CISM_MPI_INC_DIR=/usr/lib/openmpi/lib \
-  -D CISM_MPI_LIB_DIR=/usr/lib/openmpi/lib \
+  -D CISM_MPI_INC_DIR=/usr/include/x86_64-linux-gnu/mpich \
+  -D CISM_MPI_LIB_DIR=/usr/lib/x86_64-linux-gnu \
 \
   -D CMAKE_VERBOSE_MAKEFILE=OFF \
   "${cism_top}"
