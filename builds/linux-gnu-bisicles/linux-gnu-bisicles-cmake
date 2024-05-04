@@ -50,6 +50,11 @@ cmake \
   -D CMAKE_C_COMPILER=/usr/bin/mpicc \
   -D CMAKE_Fortran_COMPILER=/usr/bin/mpif90 \
 \
+  -D CISM_EXTRA_LIBS:STRING="-lblas" \
+\
+  -D CISM_MPI_INC_DIR=/usr/include/x86_64-linux-gnu/mpich \
+  -D CISM_MPI_LIB_DIR=/usr/lib/x86_64-linux-gnu \
+\
   -D CISM_HDF5_LIB_DIR=${ANAG_HDF5_DIR}/lib \
   -D CISM_HDF5_LIBS="-lnetcdff -lnetcdf -lhdf5 -lhdf5_hl -lz -lstdc++" \
   -D CMAKE_PREFIX_PATH="${ANAG_HDF5_DIR}" \

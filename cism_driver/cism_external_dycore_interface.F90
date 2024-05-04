@@ -40,7 +40,8 @@ subroutine cism_init_external_dycore(external_dycore_type,model)
   use glimmer_writestats
   use glimmer_filenames, only : filenames_init
   use glide_diagnostics
-
+  use cism_parallel
+  
 #if defined CISM_HAS_BISICLES || defined CISM_HAS_FELIX
 #define CISM_HAS_EXTERNAL_DYCORE 1
 #endif
@@ -67,11 +68,11 @@ subroutine cism_init_external_dycore(external_dycore_type,model)
   ! print *,"Initializing external dycore interface."
   call gtd_init_dycore_interface()
 
-  call parallel_barrier()
+  call parallel_barrier
   ! print *,"Initializing external dycore."
   call gtd_init_dycore(model,external_dycore_model_index)
   model%options%external_dycore_model_index = external_dycore_model_index
-  call parallel_barrier()
+  call parallel_barrier
 #else
   print *,"ERROR: The program was not built with an external dynamic core."
 #endif
@@ -91,7 +92,8 @@ subroutine cism_run_external_dycore(external_dycore_model_index,cur_time,time_in
   use glimmer_writestats
   use glimmer_filenames, only : filenames_init
   use glide_diagnostics
-
+  use cism_parallel
+  
 #if defined CISM_HAS_BISICLES || defined CISM_HAS_FELIX
 #define CISM_HAS_EXTERNAL_DYCORE 1
 #endif
@@ -107,11 +109,11 @@ subroutine cism_run_external_dycore(external_dycore_model_index,cur_time,time_in
 !  dycore_model_index = this_rank + 1
   external_dycore_model_index = 1
 
-  call parallel_barrier()
+  call parallel_barrier
   ! print *,"Running external dycore."
   call gtd_run_dycore(external_dycore_model_index,cur_time,time_inc)
   ! print *,"Completed Dycore Run."
-  call parallel_barrier()
+  call parallel_barrier
 #else
   print *,"ERROR: The program was not built with an external dynamic core."
 #endif
@@ -130,6 +132,7 @@ subroutine cism_finalize_external_dycore(external_dycore_type,model)
   use glimmer_writestats
   use glimmer_filenames, only : filenames_init
   use glide_diagnostics
+  use cism_parallel
 
 #if defined CISM_HAS_BISICLES || defined CISM_HAS_FELIX
 #define CISM_HAS_EXTERNAL_DYCORE 1
@@ -156,11 +159,11 @@ subroutine cism_finalize_external_dycore(external_dycore_type,model)
 #ifdef CISM_HAS_EXTERNAL_DYCORE
    external_dycore_model_index = 1
 
-  call parallel_barrier()
+  call parallel_barrier
   ! print *,"Finalizing external dycore."
   call gtd_delete_dycore(external_dycore_model_index)
   model%options%external_dycore_model_index = external_dycore_model_index
-  call parallel_barrier()
+  call parallel_barrier
 #else
   print *,"ERROR: The program was not built with an external dynamic core."
 #endif
