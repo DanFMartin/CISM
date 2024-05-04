@@ -303,7 +303,7 @@ module glimmer_to_dycore
     call dycore_set_ptr_double_var(model%temper%bheatflx,var_name,dtype_name,dycore_model_index)
 
     var_name = 'bmlt'//char(0)       
-    call dycore_set_ptr_double_var(model%temper%bmlt,var_name,dtype_name,dycore_model_index)
+    call dycore_set_ptr_double_var(model%basal_melt%bmlt,var_name,dtype_name,dycore_model_index)
       
     ! print *,'temp ndims,shape = ',size(shape(model%temper%temp)),shape(model%temper%temp)
 
